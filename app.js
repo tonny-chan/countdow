@@ -1,13 +1,16 @@
 var CANVAS_WIDTH = 1024;	//画布宽度
 var CANVAS_HEIGHT = 768;	//画布高度
-var currentTimeSeconds = 0;	//当前秒数
+var RADIUS = 8;	//小球半径
 var MARGIN_LEFT = 30;	//左边框距离
 var MARGIN_TOP = 30;	//上边框距离
-var RADIUS = 8;	//小球半径
+
+var currentTimeSeconds = 0;	//当前秒数
 var DIGIT_COLOR = "rgb(0,102,153)";	//小球颜色
 var obstruction = 0.75;	//阻力系数
 
-const endDateTime = new Date(2017, 4, 19, 19, 0, 0);
+var curDate = new Date();
+
+const endDateTime = new Date(curDate.getFullYear(), curDate.getMonth(), curDate.getDate(), 18);	//当天下午六点
 
 // var ball = { x:512, y:100, r:RADIUS, g:1, vx:-4, vy:-10, color:"#005588" };
 
@@ -16,6 +19,21 @@ const colors = ["#33B5E5", "#0099CC", "#AA66CC", "#9933CC", "#99CC00", "#669900"
 
 
 window.onload = function() {
+
+	CANVAS_WIDTH = document.body.clientWidth;
+	CANVAS_HEIGHT = document.body.clientHeight;
+
+	MARGIN_LEFT = Math.round(CANVAS_WIDTH/10);
+	RADIUS = Math.round(CANVAS_WIDTH * 4 / 5 / 108)-1;
+	MARGIN_TOP = Math.round(CANVAS_HEIGHT/5);
+
+	console.log("CANVAS_WIDTH = " + CANVAS_WIDTH);
+	console.log("CANVAS_HEIGHT = " + CANVAS_HEIGHT);
+	console.log("RADIUS = " + RADIUS);
+	console.log("MARGIN_LEFT = " + MARGIN_LEFT);
+	console.log("MARGIN_TOP = " + MARGIN_TOP);
+
+
 	var canvas = document.getElementById("canvas");
 	canvas.width = CANVAS_WIDTH;
 	canvas.height = CANVAS_HEIGHT;
@@ -104,7 +122,7 @@ function update() {
 		if(curSeconds%10 != nextSeconds%10) {
 			addBalls(MARGIN_LEFT + 93*(RADIUS+1), MARGIN_TOP, curSeconds%10);
 		}
-		console.log(balls.length);
+		// console.log(balls.length);
 
 	}
 
